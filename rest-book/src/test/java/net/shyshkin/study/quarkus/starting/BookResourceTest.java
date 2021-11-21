@@ -39,7 +39,8 @@ public class BookResourceTest {
                 .body("id", is(3))
                 .body("title", not(emptyOrNullString()))
                 .body("author", not(emptyOrNullString()))
-                .body("genre", not(emptyOrNullString()));
+                .body("genre", not(emptyOrNullString()))
+                .body("genre", is("IT"));
     }
 
     @Test
