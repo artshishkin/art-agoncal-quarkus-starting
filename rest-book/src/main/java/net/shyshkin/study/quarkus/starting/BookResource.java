@@ -1,5 +1,7 @@
 package net.shyshkin.study.quarkus.starting;
 
+import org.jboss.logging.Logger;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,9 +17,13 @@ public class BookResource {
     @Inject
     BookRepository repository;
 
+    @Inject
+    Logger logger;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Book> allBooks() {
+        logger.info("Returns all books");
         return repository.getAllBooks();
     }
 
@@ -25,6 +31,7 @@ public class BookResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Optional<Book> oneBook(@PathParam("id") int id) {
+        logger.info("Returns book with id: "+id);
         return repository.getBookById(id);
     }
 
@@ -32,6 +39,7 @@ public class BookResource {
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public int count() {
+        logger.info("Returns books count");
         return repository.count();
     }
 }
