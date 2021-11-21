@@ -40,7 +40,7 @@ public class BookResourceTest {
                 .body("title", not(emptyOrNullString()))
                 .body("author", not(emptyOrNullString()))
                 .body("genre", not(emptyOrNullString()))
-                .body("genre", is("IT"));
+                .body("genre", is("Drama"));
     }
 
     @Test
