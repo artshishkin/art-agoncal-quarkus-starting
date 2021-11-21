@@ -15,7 +15,7 @@ public class BookResourceTest {
           .when().get("/api/books")
           .then()
              .statusCode(200)
-             .body(is("Hello RESTEasy"));
+             .body(is("Hello World!"));
     }
 
 }

@@ -32,6 +32,11 @@ mvn -U io.quarkus:quarkus-maven-plugin:create ^
 -Dextensions="resteasy-jsonb"
 ```
 
+#####  14. Developer Joy
 
+Start Quarkus in Development Mode
+-  `mvn quarkus:dev`
+cURL it:
+-  `curl http://localhost:8080/api/books`
 
 
