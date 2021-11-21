@@ -39,4 +39,10 @@ Start Quarkus in Development Mode
 cURL it:
 -  `curl http://localhost:8080/api/books`
 
+#### Section 6: Configuring the Application
+
+#####  29.3. Injecting Configuration - in command line (#4)
+
+-  `mvn quarkus:dev -Dapp.books.genre="Sci Fi"`
+-  `mvn test -Dapp.books.genre="Sci Fi"`
 
