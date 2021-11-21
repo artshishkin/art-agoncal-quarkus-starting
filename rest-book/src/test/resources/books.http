@@ -1,4 +1,19 @@
 GET http://localhost:8080/api/books
-Accept: text/plain
+Accept: application/json
 
 ###
+GET http://localhost:8080/api/books/2
+Accept: application/json
+
+###
+GET http://localhost:8080/api/books/100
+Accept: application/json
+
+###
+GET http://localhost:8080/api/books/wrongId_notInt
+Accept: application/json
+
+###
+GET http://localhost:8080/api/books/count
+Accept: text/plain
+
