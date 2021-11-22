@@ -81,7 +81,7 @@ To activate `staging` profile
 4.  Pass params into command line
     -  `java -Dquarkus.banner.enabled=false -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar`
 
-#####  39. Building Native Executables
+#####  39.1 Building Native Executables - Windows 10
 
 1.  Package
     -  `mvn clean package -DskipTests -Dquarkus.package.type=native`
@@ -99,4 +99,40 @@ To activate `staging` profile
 2.  Provide command-line arguments
     -  like jar file
     -  `target\rest-book-1.0.0-SNAPSHOT-runner.exe -Dquarkus.banner.enabled=false`
+
+#####  39.2 Building Native Executables - Ubuntu
+
+1.  Install Java manually
+    -  `wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz`
+    -  `tar zxvf openjdk-11+28_linux-x64_bin.tar.gz`
+    -  `sudo mv jdk-11* /usr/local/`
+    -  `sudo vim /etc/profile.d/jdk.sh`
+        -  add
+        -  `#!/bin/bash`
+        -  `export JAVA_HOME=/usr/local/jdk-11`
+        -  `export PATH=$PATH:$JAVA_HOME/bin`
+    -  `source /etc/profile`
+    -  `java -version`
+    -  `which java`
+2.  Git clone
+3.  Build native image
+    -  `chmod +x mvnw` (if needed)
+    -  `./mvnw clean package -Pnative`
+    -  will build in Docker (even without GraalVM installed)
+    -  size 45MB
+4.  Run native image
+    -  `./target/rest-book-1.0.0-SNAPSHOT-runner`
+    -  started in 0.026s
+        -  `./mvnw quarkus:dev` -  started in 2.615s
+        -  Fat-jar        
+            -  `./mvnw package -Dquarkus.package.type=uber-jar`
+            -  `java -jar ./target/rest-book-1.0.0-SNAPSHOT-runner.jar` - started in 1.573s
+        -  Fast jar
+            -  `./mvnw package -Dquarkus.package.type=jar`
+            -  `java -jar ./target/quarkus-app/quarkus-run.jar`
+
+
+
+
+
 
