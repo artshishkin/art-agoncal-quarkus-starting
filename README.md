@@ -46,3 +46,12 @@ cURL it:
 -  `mvn quarkus:dev -Dapp.books.genre="Sci Fi"`
 -  `mvn test -Dapp.books.genre="Sci Fi"`
 
+#####  30. Configuring Quarkus
+
+-  [All configurations](https://quarkus.io/guides/all-config)
+-  `http://localhost:8080`
+-  `http://localhost:8080/q/dev/`
+-  `http://localhost:8080/q/dev/io.quarkus.quarkus-vertx-http/config`
+
+
+

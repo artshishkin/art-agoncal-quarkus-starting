@@ -2,9 +2,11 @@ package net.shyshkin.study.quarkus.starting;
 
 import com.github.javafaker.Faker;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,8 +20,12 @@ public class InMemoryBookRepository implements BookRepository {
 
     private List<Book> books;
 
+    @Inject
+    Logger logger;
+
     @PostConstruct
     void init() {
+        logger.debug("Initializing books");
         books = IntStream.rangeClosed(1, 5)
                 .mapToObj(this::randomBook)
                 .collect(Collectors.toList());
