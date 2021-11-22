@@ -131,8 +131,13 @@ To activate `staging` profile
             -  `./mvnw package -Dquarkus.package.type=jar`
             -  `java -jar ./target/quarkus-app/quarkus-run.jar`
 
+#####  41. Testing Native Executables
 
-
-
-
+In Linux
+-  `./mvnw verify -Pnative` - failure due to difference
+    -  %test.app.books.genre=Drama
+    -  %prod.app.books.genre=Information Technology
+    -  Override native test
+In Windows
+-  `cmd.exe /c 'call "c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean verify -Pnative' `       
 
