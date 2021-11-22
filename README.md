@@ -58,4 +58,27 @@ cURL it:
 To activate `staging` profile
 -  `mvn quarkus:dev -Dquarkus.profile=staging`
 
+####  Section 7: Packaging the Application
+
+#####  37. Building Executable JARs
+
+1.  Start in dev mode
+   -  `mvn quarkus:dev` - Started in 4.6s (OpenJDK Runtime Environment GraalVM CE 21.3.0 in Windows 10 Home)
+   -  `mvn quarkus:dev` - Started in 3.94s (Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS) in Windows 10 Home)
+2.  Package Fast-Jar
+   -  `mvn clean package -DskipTests -Dquarkus.package.type=jar`
+   -  **or** just (because `jar` is by default)
+   -  `mvn clean package -DskipTests`
+      -  will generate default Fast Jar with all needed code
+      -  `target\quarkus-app\quarkus\quarkus-application.dat` - index for fast class scanning (Fast Jar)
+      -  size
+         -  quarkus-run.jar: 689B
+         -  quarkus-app folder: 17.6MB   
+   -  `java -jar target\quarkus-app\quarkus-run.jar` - Started in 1.959s
+3.  Package Uber-Jar
+    -  `mvn clean package -DskipTests -Dquarkus.package.type=uber-jar` - 17.5MB
+    -  `java -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar` - Started in 1.939s
+4.  Pass params into command line
+    -  `java -Dquarkus.banner.enabled=false -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar`
+
 
