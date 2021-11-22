@@ -53,5 +53,9 @@ cURL it:
 -  `http://localhost:8080/q/dev/`
 -  `http://localhost:8080/q/dev/io.quarkus.quarkus-vertx-http/config`
 
+#####  33. Adding Profiles
+
+To activate `staging` profile
+-  `mvn quarkus:dev -Dquarkus.profile=staging`
 
 
