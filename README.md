@@ -81,4 +81,22 @@ To activate `staging` profile
 4.  Pass params into command line
     -  `java -Dquarkus.banner.enabled=false -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar`
 
+#####  39. Building Native Executables
+
+1.  Package
+    -  `mvn clean package -DskipTests -Dquarkus.package.type=native`
+    -  `mvn clean package -Pnative` native profile
+    -  **errors**
+    -  fixing errors
+        -  added `C:\Windows\System32` to System PATH    
+        -  added `c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64` to PATH
+        -  excluded `javafaker`
+        -  in PowerShell run
+            -  `cmd.exe /c 'call "c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean package -Pnative' `
+    -  got an executable
+        -  `target\rest-book-1.0.0-SNAPSHOT-runner.exe` - 47.2MB
+        -  Started in 0.23s
+2.  Provide command-line arguments
+    -  like jar file
+    -  `target\rest-book-1.0.0-SNAPSHOT-runner.exe -Dquarkus.banner.enabled=false`
 

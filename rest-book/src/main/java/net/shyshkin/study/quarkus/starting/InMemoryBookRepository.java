@@ -1,6 +1,5 @@
 package net.shyshkin.study.quarkus.starting;
 
-import com.github.javafaker.Faker;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
@@ -9,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -51,9 +51,9 @@ public class InMemoryBookRepository implements BookRepository {
     private Book randomBook(int id) {
         return new Book(
                 id,
-                Faker.instance().book().title(),
-                Faker.instance().book().author(),
-                Faker.instance().date().birthday().getYear(),
+                "Title_" + id,
+                "Author " + id,
+                ThreadLocalRandom.current().nextInt(1920, 2021),
                 genre
         );
     }
