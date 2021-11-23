@@ -141,3 +141,29 @@ In Linux
 In Windows
 -  `cmd.exe /c 'call "c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean verify -Pnative' `       
 
+####  Section 8: Executing the Application
+
+#####  45. Containerizing Executable JARs
+
+1.  Add extension `quarkus-container-image-docker`
+    -  `mvn quarkus:add-extension -Dextensions="quarkus-container-image-docker"`
+    -  **or**
+    -  `mvn quarkus:add-extension -Dextensions="container-image-docker"`
+2.  Build docker image with default settings
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.package.type=jar` (or may use type=legacy-jar)
+    -  will create `admin/rest-book:1.0.0-SNAPSHOT`
+        -  group: `admin` - username
+        -  tag: `1.0.0-SNAPSHOT` - version
+3.  Customizing image name
+    -  `quarkus.container-image.group=artarkatesoft`
+    -  `quarkus.container-image.tag=jvm-${quarkus.application.version}`
+    -  `quarkus.container-image.additional-tags=jvm-latest,latest`
+    -  `mvn package -Dquarkus.container-image.build=true`   
+    -  **or**
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.container-image.group=artarkatesoft -Dquarkus.container-image.tag=jvm`
+    -  size: 520MB
+    -  start time 1.58s
+4.  Run docker container
+    -  `docker container run -i --rm -p 8080:8080 artarkatesoft/rest-book:jvm-latest`
+
+
