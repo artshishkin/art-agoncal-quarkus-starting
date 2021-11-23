@@ -166,4 +166,23 @@ In Windows
 4.  Run docker container
     -  `docker container run -i --rm -p 8080:8080 artarkatesoft/rest-book:jvm-latest`
 
+#####  47. Containerizing Linux Native Executables
+
+1.  Build docker image
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.package.type=native` (**fail** on Windows)
+2.  Set to build Linux native binary in Linux Docker container
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.package.type=native -Dquarkus.native.container-build=true`
+    -  size 149MB
+3.  Configure image name
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.native.container-build=true -Pnative -Dquarkus.container-image.tag=native-${quarkus.application.version}`
+4.  Run container
+    -  `docker container run -i --rm -p 8080:8080 artarkatesoft/rest-book:native-1.0.0-SNAPSHOT`
+    -  started in 0.048s       
+5.  Provide image tags through maven profile
+    -  `<quarkus.container-image.tag>native-${quarkus.application.version}</quarkus.container-image.tag>`
+    -  `<quarkus.container-image.additional-tags>native-latest,latest</quarkus.container-image.additional-tags>`
+    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.native.container-build=true -Pnative`
+
+
+
 
