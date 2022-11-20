@@ -77,6 +77,7 @@ To activate `staging` profile
    -  `java -jar target\quarkus-app\quarkus-run.jar` - Started in 1.959s
 3.  Package Uber-Jar
     -  `mvn clean package -DskipTests -Dquarkus.package.type=uber-jar` - 17.5MB
+    -  **or** `mvn clean package -DskipTests '-Dquarkus.package.type=uber-jar'` in Windows
     -  `java -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar` - Started in 1.939s
 4.  Pass params into command line
     -  `java -Dquarkus.banner.enabled=false -jar target\rest-book-1.0.0-SNAPSHOT-runner.jar`
@@ -159,6 +160,7 @@ In Windows
     -  `quarkus.container-image.tag=jvm-${quarkus.application.version}`
     -  `quarkus.container-image.additional-tags=jvm-latest,latest`
     -  `mvn package -Dquarkus.container-image.build=true`   
+    -  in case of error try `mvn package '-Dquarkus.container-image.build=true'`   
     -  **or**
     -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.container-image.group=artarkatesoft -Dquarkus.container-image.tag=jvm`
     -  size: 520MB
@@ -174,14 +176,19 @@ In Windows
     -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.package.type=native -Dquarkus.native.container-build=true`
     -  size 149MB
 3.  Configure image name
-    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.native.container-build=true -Pnative -Dquarkus.container-image.tag=native-${quarkus.application.version}`
+    -  In Linux or WSL2 Ubuntu:
+    -  `./mvnw package -Dquarkus.container-image.build=true -Dquarkus.native.container-build=true -Pnative '-Dquarkus.container-image.tag=native-${quarkus.application.version}'`
+    -  In Windows:
+    -  `mvn package '-Dquarkus.container-image.build=true' '-Dquarkus.native.container-build=true' -Pnative '-Dquarkus.container-image.tag=native-${quarkus.application.version}'`
 4.  Run container
     -  `docker container run -i --rm -p 8080:8080 artarkatesoft/rest-book:native-1.0.0-SNAPSHOT`
     -  started in 0.048s       
 5.  Provide image tags through maven profile
-    -  `<quarkus.container-image.tag>native-${quarkus.application.version}</quarkus.container-image.tag>`
-    -  `<quarkus.container-image.additional-tags>native-latest,latest</quarkus.container-image.additional-tags>`
-    -  `mvn package -Dquarkus.container-image.build=true -Dquarkus.native.container-build=true -Pnative`
+    - `<quarkus.container-image.tag>native-${quarkus.application.version}</quarkus.container-image.tag>`
+    - `<quarkus.container-image.additional-tags>native-latest,latest</quarkus.container-image.additional-tags>`
+    - `mvn package '-Dquarkus.container-image.build=true' '-Dquarkus.native.container-build=true' -Pnative` (Windows)
+    - **or**
+    - `./mvnw package -Dquarkus.container-image.build=true -Pnative` (Linux)
 
 
 
